@@ -1778,7 +1778,6 @@ var annotools = new Class({
         }
         var SM = new SimpleModal();
         SM.addButton("Confirm", "btn primary", function() {
-            var text = '{"text" : [';
             if (mode == "edit") {
                 annotools.deleteAnnot(newAnnot.id);
                 delete newAnnot.id;
@@ -1786,50 +1785,55 @@ var annotools = new Class({
             if (mode == "new" && newAnnot.type == "line") {
                 submission = "{ \"Length\" : \"" + newAnnot.length + "nm\" }";
             } else {
+                var text = '{"text" : [';
+                var fieldReplacement = [];
+                var fieldName = [];
                 var readyToSubmit = true;
                 for (var i = 0; i < field.length; i++) {
                     var fieldElem = $$(document.getElementsByName(field[i]));
-                    var replacement = "\"";
+                    fieldName[i] = field[i];
                     var value = "";
+                    var hasValue = false;
                     if (fieldElem[0].type == "text") {
-                        replacement += $(field[i]).value + "\"";
-                        value = $(field[i]).value;
-                        if (value == "") {
-                            readyToSubmit = false;
+                        value = $(field[i]).value
+                        if (value != "") {
+                            hasValue = true;
+                            var replacement = "\"" + value + "\"";
                         }
-                    } else if (fieldElem[0].type = "checkbox") {
-                        replacement = "[ ";
-                        var checked = false;
+                    } else if (fieldElem[0].type == "checkbox") {
+                        var replacement = "[ ";
                         for (var j = 0; j < fieldElem.length; j++) {
                             if (fieldElem[j].checked) {
                                 replacement += "\"" + fieldElem[j].value + "\" , ";
                                 value = fieldElem[j].value;
-                                checked = true;
+                                hasValue = true;
                             }
                         }
                         replacement = replacement.substring(0, replacement.length - 2) + "]";
-                        readyToSubmit = readyToSubmit && checked;
                     } else if (fieldElem[0].type == "radio") {
-                        var checked = false;
+                        var replacement = "\"";
                         for (var j = 0; j < fieldElem.length; j++) {
                             if (fieldElem[j].checked) {
                                 replacement += fieldElem[j].value + "\"";
                                 value = fieldElem[j].value;
-                                checked = true;
+                                hasValue = true;
                                 break;
                             }
                         }
-                        readyToSubmit = readyToSubmit && checked;
                     }
+                    readyToSubmit = readyToSubmit && hasValue;
+                    fieldReplacement[i] = replacement;
                     text += '{"' + field[i] + '":"' + value + '"},';
-                    submission = submission.replace("__" + field[i] + "__", replacement);
                 }
                 text = text.substring(0, text.length - 1);
                 text += ']}';
             }
-            console.log(submission);
             if (readyToSubmit) {
+            	for (var i = 0; i < fieldName.length; i ++) {
+                    submission = submission.replace("__" + fieldName[i] + "__", fieldReplacement[i]);
+            	}
                 if (mode == "new" || mode == "edit") {
+                    console.log(submission);
                     newAnnot.text = JSON.parse(submission);
                     annotools.addnewAnnot(newAnnot);
                     annotools.getAnnot();
