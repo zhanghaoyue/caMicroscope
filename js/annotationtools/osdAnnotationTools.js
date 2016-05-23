@@ -1800,7 +1800,8 @@ annotools.prototype.promptForAnnotation = function(newAnnot, mode, annotools, ct
 
         panel.html(function(){
           
-            return "<h4> Work Order </h4> <ul><li> x1: " + x  + "</li> <li> y1: " +y+ "</li> <li> w: "+ w+"</li> <li>h: "+h +"</li> <li>Algorithm: Test1</li></ul> <br /> <button id='submitWorkOrder'>Submit</button> <button id='cancelWorkOrder'>Cancel</button>";
+            return "<h4> Work Order </h4> <ul><li> x1: " + x  + "</li> <li> y1: " +y+ "</li> <li> w: "+ w+"</li> <li>h: "+h +"</li> <li>Algorithm: SuperSegmenter</li> " 
+                        + "<li>Execution Id:<input id='order-execution_id'></input></li>" + "<li>Notes: <textarea id='order-notes'></textarea>" + "</ul> <br /> <button id='submitWorkOrder'>Submit</button> <button id='cancelWorkOrder'>Cancel</button>";
 
         });
 
@@ -1810,29 +1811,6 @@ annotools.prototype.promptForAnnotation = function(newAnnot, mode, annotools, ct
         console.log(annotools.imagingHelper.physicalToDataX(annotools.imagingHelper.logicalToPhysicalX((newAnnot.x+newAnnot.w))));
         console.log(annotools.imagingHelper.physicalToDataY(annotools.imagingHelper.logicalToPhysicalY(newAnnot.y+newAnnot.h)));
         */
-        var order ={
-        "input":
-            {
-                "host": "dragon.cci.emory.edu",
-                "port": 9099,
-                "path": "/services/TCGA/GeoJSONMetaData/query/getFileLocationByIID",
-                "case_id": iid, 
-                "x": x,
-                "y": y,
-                "w": w,
-                "h": h,
-                "format": "JPG",
-                "iipServer": "http://dragon.cci.emory.edu/fcgi-bin/iipsrv.fcgi"
-            },
-        "output":
-            {
-                "format": "mask",
-                "host": "dragon.cci.emory.edu",
-                "port": 9099,
-                "path": "/services/DynamicServices/Annotations/submit/json"
-            }
-        };
-    console.log(order);    
 
     jQuery("#cancelWorkOrder").click(function(){
         console.log("here");
@@ -1853,28 +1831,65 @@ annotools.prototype.promptForAnnotation = function(newAnnot, mode, annotools, ct
         //annotools.removeMouseEvents();
         //annotools.getMultiAnnot();            
         
-        var order ={
-        "input":
-            {
-                "host": "dragon.cci.emory.edu",
-                "port": 9099,
-                "path": "/services/TCGA/GeoJSONMetaData/query/getFileLocationByIID",
-                "case_id": iid, 
-                "x": x,
-                "y": y,
-                "w": w,
-                "h": h,
-                "format": "JPG",
-                "iipServer": "http://dragon.cci.emory.edu/fcgi-bin/iipsrv.fcgi"
-            },
-        "output":
-            {
-                "format": "mask",
-                "host": "dragon.cci.emory.edu",
-                "port": 9099,
-                "path": "/services/DynamicServices/Annotations/submit/json"
+        var username = "lastlegion";
+        var execution_id = jQuery("#order-execution_id").val();
+        var notes = jQuery("#order-notes").val();
+
+
+        var order = {
+            "type": "order",
+            
+            "data":{ 
+                "title": username + " :: " +execution_id,
+                "algorithm": "SuperSegmenter",
+                "execution_id": execution_id,
+                "created_by":  username,
+                "notes": notes,
+                "order":{
+
+                    "metadata": {
+                        "created_on": Date.now(),
+                        "created_by": "lastlegion"
+                    },
+                    "image": {
+                        "width": 48002,
+                        "height": 35558,
+                        "case_id": iid
+                    },
+                    "roi": {
+                        "x": x,
+                        "y": y,
+                        "w": w,
+                        "h": h
+                    },
+                    "execution": {
+                        "execution_id": execution_id,
+                          "algorithm": "SuperSegmenter",
+                          "parameters": [
+                            {
+                              "blur": 0.4
+                            },
+                            {
+                              "format": "jpg"
+                            }
+                          ]
+                    }
+                }
             }
         };
+        
+
+
+        /*
+        var order = {
+            "type": "order",
+
+            "data":{ 
+                "created_on": Date.now(),
+                "created_by": "lastlegion"
+            }
+        }
+        */
         jQuery.post("api/Data/workOrder.php", order)
             .done(function(res){
                 console.log(res);
