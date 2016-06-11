@@ -78,7 +78,7 @@ AnnotationStore.prototype.fetchAnnotations = function(x1,y1,x2,y2, footprint, al
         console.log(footprint);
     var midX = x2;
     var midY = y2;
-    algorithms.push("ganesh:algo1");
+    //algorithms.push("test");
     var algorithms_urlparam = JSON.stringify(algorithms);
     algorithms_urlparam = algorithms_urlparam.replace("[", "%5B");
     algorithms_urlparam = algorithms_urlparam.replace("]", "%5D");

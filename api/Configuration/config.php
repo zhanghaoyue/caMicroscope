@@ -20,14 +20,15 @@ return array(
      * temp
      */
     'algorithmsForImage' => "http://dragon.cci.emory.edu:9099/services/quip/Analysis2/query/CompletedAlgorithms?",
-//    'getMultipleAnnotations' => "$serviceUrl/GeoJSONImageMetaData/query/getMultipleMarkups?",
-    'getMultipleAnnotations' => "http://172.17.0.2:9099/services/Camicroscope_Annotations/MarkupLoader/query/getMultipleMarkups?",
+    //'getMultipleAnnotations' => "$serviceUrl/GeoJSONImageMetaData/query/getMultipleMarkups?",
+    'getMultipleAnnotations' => "http://172.17.0.5:9099/services/Camicroscope_Annotations/MarkupLoader/query/getMultipleMarkupsNoFootprint?",
 
-    'retrieveTemplate' => "$tempMarkupUrl/AnnotationTemplate/query/RetrieveTemplate",
+    'retrieveTemplate' => "$templateUrl/query/retrieveTemplate",
     'getAllAnnotations' => "$tempMarkupUrl/Annotations/query/byUserAndImageID?iid=",
     'getAnnotationsSpatial' => "$serviceUrl/GeoJSONImageMetaData/query/getMarkups?",
     'getAnnotationSpatialFilter' => "$tempMarkupUrl/Annotations/query/allByFilter?iid=",
-    'postAnnotation' => "$tempMarkupUrl/Annotations/submit/singleAnnotation",
+    'postAnnotation' => "$serviceUrl/GeoJSONImageMetaData/submit/json",
+    //'postAnnotation' => "dragon.cci.emory.edu:9099/services/TCGA/createAnnotsTest/submit/json",
     'retrieveAnnotation' => "$tempMarkupUrl/Annotations/query/byAnnotId?annotId=",
     'postJobParameters' => "$tempMarkupUrl/AnalysisJobs/submit/singleJob",
     'deleteAnnotation' => "$tempMarkupUrl/Annotations/delete/singleAnnotation?annotId=",

@@ -173,6 +173,7 @@ annotools.prototype.getMultiAnnot = function(viewer) {
     var origin = new OpenSeadragon.Point(this.imagingHelper.physicalToDataX(0), this.imagingHelper.physicalToDataY(0));
     var area = (max.x - origin.x) * (max.y - origin.y);
     algorithms.push("ganesh:algo1");
+    algorithms.push("ganesh:test2");
 
     var t1 = 0;
     if(algorithms.length){

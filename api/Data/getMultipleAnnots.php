@@ -32,7 +32,7 @@ $api_key = '4fbb38a3-1821-436c-a44d-8d3bc5efd33e';
             
 
             $url = $getUrl . "&CaseId=" . $iid ."&x1=" . $x . "&y1=" . $y . "&x2=" . $x1 . "&y2=" . $y1 . "&footprint=" . $area . "&algorithms=" . $algorithms;
-
+            //echo $url;
 			$getRequest = new RestRequest($url,'GET');
             $getRequest->execute();
 
