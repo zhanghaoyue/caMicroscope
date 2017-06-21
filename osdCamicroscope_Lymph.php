@@ -129,7 +129,7 @@
             <button type="button" class="btn_heatmap" id="btn_heatmapweight_help">&#x2753</button>
         </div>
 
-        <div id="markuppanel">
+        <div id="markuppanel"><a href='#'><div id='closeMarkupPanel'><img src='images/ic_close_white_24px.svg' title='Close' alt="Close X" height="16" width="16"></div></a>
         <input type="radio" name="marktype" value="LymPos" checked="checked" id="LymPos" class="radio_markup">
             <label for="LymPos" class=radio_markup> (1) LymPos (draw thin line)</label><br>
         <input type="radio" name="marktype" value="LymNeg" id="LymNeg" class="radio_markup">
@@ -264,6 +264,15 @@
         jQuery("#weightpanel").hide();
         jQuery("#markuppanel").hide();
         jQuery("#switchuserpanel").hide();
+        
+        jQuery('#closeMarkupPanel').click(function (e) {
+	        e.preventDefault();
+            jQuery("canvas").css("cursor", "default");
+            jQuery("#markuppanel").hide('slide');
+            annotool.drawLayer.hide();
+            annotool.addMouseEvents();
+        })
+        
         if(bound_x && bound_y){
             var ipt = new OpenSeadragon.Point(+bound_x, +bound_y);
             var vpt = viewer.viewport.imageToViewportCoordinates(ipt);

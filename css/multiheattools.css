@@ -38,6 +38,16 @@
 
 }
 
+#closeMarkupPanel {
+	display: inline-block;
+	width: 16px;
+	float:right;
+}
+
+#closeMarkupPanel:hover {
+    background-color: crimson;
+}
+
 #markuppanel {
     width: 220px;
     font-family: Arial, Roboto;
