@@ -285,7 +285,7 @@ ToolBar.prototype.createButtons = function () {
       'src': 'images/Heatmap.svg'
     })
 
-    tool.append(this.lymphbutton) // Lymphocyte Button
+    //tool.append(this.lymphbutton) // Lymphocyte Button
 
     this.spacer1 = jQuery('<img>', {
       'class': 'spacerButton',
@@ -299,7 +299,7 @@ ToolBar.prototype.createButtons = function () {
       src: 'images/composite.png',
       id: 'gotocompositebutton'
     })
-    tool.append(this.compositebutton)
+    //tool.append(this.compositebutton)
 
 
     // tool.append(this.measurebutton)
@@ -371,7 +371,7 @@ ToolBar.prototype.createButtons = function () {
      * Event handlers on click for the buttons
      */
 		this.homebutton.on('click', function(){
-		 window.location.href = "/select.php";
+		 window.location.href = "../select.php";
 		});
 
     this.lymphbutton.on('click', function () {
