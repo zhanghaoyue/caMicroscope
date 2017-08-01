@@ -1,4 +1,4 @@
-    <?php 
+    <?php
 	session_start();
 	require '../authenticate.php';
 
@@ -23,8 +23,8 @@
         <link rel="stylesheet" type="text/css" media="all" href="css/ui.fancytree.min.css" />
         <link rel="stylesheet" type="text/css" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.7.0/jquery.modal.css" />
         <script src="js/dependencies/jquery.js"></script>
-  
-  
+
+
         <!--JSON Form dependencies-->
 
         <script type="text/javascript" src="js/dependencies/underscore.js">
@@ -35,10 +35,10 @@
         <script type="text/javascript" src="js/dependencies/jsonform.js"></script>
         <script type="text/javascript" src="js/dependencies/jsv.js"></script>
         <!--End JSON Form dependencies -->
-  
-  
-  
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="js/openseadragon/openseadragon-bin-1.0.0/openseadragon.js"></script>
         <script src="js/openseadragon/openseadragon-imaginghelper.min.js"></script>
         <script src="js/openseadragon/openseadragon-scalebar.js"></script>
@@ -54,23 +54,26 @@
 		<!--<script src="js/annotationtools/osdAnnotationDotTools.js"></script>-->
 		<!--<script src="js/annotationtools/osdAnnotationTools_Marking.js"></script>-->
         <!--<script src="js/annotationtools/geoJSONHandler.js"></script>-->
-        
+
         <script src="js/annotationtoolslymph/ToolBar_Lymph.js"></script>
         <script src="js/annotationtoolslymph/AnnotationStore_Lymph.js"></script>
         <script src="js/annotationtoolslymph/osdAnnotationTools_Lymph.js"></script>
 		<script src="js/annotationtoolslymph/osdAnnotationTools_Marking.js"></script>
         <script src="js/annotationtoolslymph/geoJSONHandler_Lymph.js"></script>
-        
-        
+
+
         <script src="js/dependencies/MD5.js"></script>
-        <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script> 
-        
+        <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
+
         <!--<script src="js/dependencies/jquery-ui.min.js"></script>-->
 
         <script src="js/dependencies/jquery.fancytree-all.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.7.0/jquery.modal.js"> </script>
         <script src="js/dependencies/simplemodal.js"></script>
         <script src="js/dependencies/d3.js"></script>
+
+        <script src="js/Helpers/OsdStateManager.js"></script>
+
         <style type="text/css">
         .openseadragon
         {
@@ -102,7 +105,7 @@
   right: 0;
 }
         </style>
-         <link rel="stylesheet" type="text/css" media="all" href="css/annotools.css" /> 
+         <link rel="stylesheet" type="text/css" media="all" href="css/annotools.css" />
 	 <link rel="stylesheet" type="text/css" media="all" href="css/multiheattools.css" />
     </head>
 
@@ -118,7 +121,7 @@
             <label class="lb_heatmap"><input type="checkbox" id="cb2" checked> Necrosis Specificity</label>
             <div id="bar3" class="bar" align="right"><div id="slide3" class="slide"></div></div>
             <label class="lb_heatmap"><input type="checkbox" id="cb3" checked> Smoothness</label><br><p>
-	    
+
 	    <button type="button" class="btn_heatmap" id="btn_revertWeight">Revert Weights</button>
 
             <br><p>
@@ -149,39 +152,15 @@
         <button type="button" class="btn_mark" id="btn_mark_help">&#x2753</button> </div>
         <div id="div_weight_locked" style="display: none;">Free</div>
 
-        <div id="switchuserpanel">
-        Change username to: <br><p><p>
-        <?php
-	    /*
-            $iid = $_GET['tissueId'];
-            $orig_email = $_GET['email'];
-            $files = scandir('data/');
-            $ele_id = 0;
-            for ($i = 0; $i < count($files); ++$i) {
-                $fname = $files[$i];
-                if (strpos($fname, $iid) !== false) {
-                    $email = explode('_', $fname)[1];
-                    $email = substr($email, 0, strlen($email) - 4);
-                    if (strcmp($email, $orig_email) != 0) {
-                        printf("<input type=\"radio\" name=\"usergroup\" value=\"%s\" \
-                            id=\"switch_user_%d\" class=\"radio_user\">\n", $email, $ele_id);
-                    } else {
-                        printf("<input type=\"radio\" name=\"usergroup\" value=\"%s\" checked=\"checked\" \
-                            id=\"switch_user_%d\" class=\"radio_user\">\n", $email, $ele_id);
-                    }
-                    printf("<label for=\"%s\" class=radio_user> %s </label><br>\n", $email, $email);
-                    $ele_id ++;
-                }
-            }
-	    */
-        ?>
+        <div id="switchuserpanel"><a href='#'><div id='closeSwitchUser'><img src='images/ic_close_white_24px.svg' title='Close' alt="Close X" height="16" width="16"></div></a>
+            <h6><img src="images/switch_user.svg" alt="Switch user" height="30" width="30"> Change username to:</h6><br />
         </div>
 
         <div id="algosel"><div id="tree"></div></div>
             <div class="demoarea">
                 <div id="viewer" class="openseadragon"></div>
             </div>
-        <div id"navigator"></div>
+        <div id="navigator"></div>
 
         </div>
         <div id="confirmDelete" style="display:none">
@@ -193,26 +172,26 @@
           var tissueId = <?php echo json_encode($_GET['tissueId']); ?>;
 
           var cancerType = "<?php echo $_SESSION["cancerType"] ?>";
-          console.log(cancerType);
+          //console.log(cancerType);
           var imagedata = new OSDImageMetaData({imageId:tissueId});
           //console.log(tissueId);
           //console.log(imagedata);
           //console.log(tissueId);
-          
+
           var MPP = imagedata.metaData[0];
           console.log(MPP);
             //console.log(imagedata);
           var fileLocation = imagedata.metaData[1];//.replace("tcga_data","tcga_images");
           //console.log(fileLocation);
-         
-          var viewer = new OpenSeadragon.Viewer({ 
-                id: "viewer", 
+
+          var viewer = new OpenSeadragon.Viewer({
+                id: "viewer",
                 prefixUrl: "images/",
                 showNavigator:  true,
                 navigatorPosition:   "BOTTOM_RIGHT",
                 //navigatorId: "navigator",
                 zoomPerClick: 2,
-                zoomPerScroll: 1,
+                //zoomPerScroll: 1,
                 animationTime: 0.75,
                 maxZoomPixelRatio: 2,
                 visibilityRatio: 1,
@@ -222,7 +201,7 @@
     //      var zoomLevels = viewer.zoomLevels({
     //        levels:[0.001, 0.01, 0.2, 0.1,  1]
     //      });
-            
+
             viewer.addHandler("open", addOverlays);
             viewer.clearControls();
             viewer.open("<?php print_r($config['fastcgi_server']); ?>?DeepZoom=" + fileLocation);
@@ -230,7 +209,7 @@
             imagingHelper.setMaxZoom(2);
             //console.log(this.MPP);
             viewer.scalebar({
-              type: OpenSeadragon.ScalebarType.MICROSCOPY,
+              type: OpenSeadragon.ScalebarType.MAP,
               pixelsPerMeter: (1/(parseFloat(this.MPP["mpp-x"])*0.000001)),
               xOffset: 5,
               yOffset: 10,
@@ -240,6 +219,11 @@
               backgroundColor: "rgba(255,255,255,0.5)",
               barThickness: 2
             });
+
+            var StateMan = new OsdStateManager(viewer, {});
+            StateMan.setState();
+            viewer.addHandler("zoom", StateMan.getState);
+            viewer.addHandler("pan", StateMan.getState);
     //console.log(viewer);
     function isAnnotationActive(){
         this.isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
@@ -256,7 +240,7 @@
         //var sessionUsername = 'test@gmail.com';
         annotool= new annotools({
                 canvas:'openseadragon-canvas',
-                iid: tissueId, 
+                iid: tissueId,
                 viewer: viewer,
                 annotationHandler: annotationHandler,
                 mpp:MPP,
@@ -270,25 +254,8 @@
                 width: '100%',
                 iid: tissueId,
                 annotool: annotool
-           
-        });
 
-        /*
-        $.ajax({
-            type: "POST",
-            url: "php/check_super_user.php",
-            data: {user: sessionUsername},
-            dataType: "text",
-            success: function(data) {
-                console.log(data);
-                if (data == 1)
-                    toolBar.superuser = true;
-                else
-                    toolBar.superuser = false;
-            }
         });
-        */
-        
         annotool.toolBar = toolBar;
         annotationHandler.annotool = annotool;
         annotationHandler.toolbar = toolBar;
@@ -316,7 +283,7 @@
     if (!String.prototype.format) {
         String.prototype.format = function() {
             var args = arguments;
-            return this.replace(/{(\d+)}/g, function(match, number) { 
+            return this.replace(/{(\d+)}/g, function(match, number) {
             return typeof args[number] != 'undefined'
                 ? args[number]
                 : match
@@ -340,7 +307,7 @@
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-46271588-1', 'auto');
   ga('send', 'pageview');
@@ -349,4 +316,3 @@
 
 </body>
 </html>
-
