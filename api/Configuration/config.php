@@ -87,7 +87,7 @@ return array(
     'getMPP' => "$imageUrl/query/getMPPByIID?api_key=",
 
     'getImageInfoByCaseID'=> "$imageUrl/query/getImageInfoByCaseID?api_key=",
-    'fastcgi_server' => "/fcgi-bin/iipsrv.fcgi",
+    'fastcgi_server' => "../fcgi-bin/iipsrv.fcgi",
 
   
 	 /* Dynamic Services */														 
