@@ -254,13 +254,13 @@ ToolBar.prototype.createButtons = function () {
           'src': 'images/Heatmap.svg'
       });
 
-      tool.append(this.lymphbutton); // Lymphocyte Button
+      //tool.append(this.lymphbutton); // Lymphocyte Button
 
       this.spacer1 = jQuery('<img>', {
           'class': 'spacerButton',
           'src': 'images/spacer.svg'
       });
-      tool.append(this.spacer1);
+      //tool.append(this.spacer1);
 
       /*a link to segment curation application with this composite button */
       this.compositebutton = jQuery('<img>', {
@@ -317,13 +317,13 @@ ToolBar.prototype.createButtons = function () {
           'class': 'spacerButton',
           'src': 'images/spacer.svg'
       });
-      tool.append(this.spacer2);
-
+      //tool.append(this.spacer2);
+      tool.append(this.spacer1);
       this.filterbutton = jQuery('<img>', {
           'data-toggle': 'tooltip',
           'data-placement': 'bottom',
           'title': 'Filter Markups',
-          'class': 'toolButton firstToolButtonSpace',
+          'class': 'toolButton',
           'src': 'images/filter.svg'
       });
       tool.append(this.filterbutton); // Filter Button
@@ -350,7 +350,7 @@ ToolBar.prototype.createButtons = function () {
           'class': 'spacerButton',
           'src': 'images/spacer.svg'
       });
-      tool.append(this.spacer1);
+
 
       this.analyticsbutton = jQuery('<img>', {
           'data-toggle': 'tooltip',
@@ -361,7 +361,7 @@ ToolBar.prototype.createButtons = function () {
 
       });
       tool.append(this.analyticsbutton);
-
+      tool.append(this.spacer1);
       this.sharebutton = jQuery('<img>', {
           'data-toggle': 'tooltip',
           'data-placement': 'bottom',
