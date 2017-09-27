@@ -69,7 +69,9 @@
 
         <script src="js/Helpers/OsdStateManager.js"></script>
         <script src="js/Helpers/ClientPrefManager.js"></script>
-
+        <script src="js/Helpers/socket.io.js"></script>
+        <script src="js/Helpers/HubSpokeSocket.js"></script>
+        <script src="packages/hub.js"></script>
         <script src="js/dependencies/jquery.fancytree-all.min.js"></script>
         <script src="js/dependencies/simplemodal.js"></script>
         <style type="text/css">
