@@ -1,104 +1,17 @@
-    <?php 
-    require '../authenticate.php';
+<?php
+/**
+ * caMicroscope
+ */
+include 'osdHeader.php';
+?>
 
-    $config = require 'api/Configuration/config.php';
-
-    ?>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>[caMicroscope OSD][Subject: <?php echo json_encode($_GET['tissueId']); ?>][User: <?php echo $_SESSION["name"]; ?>]</title>
-
-        <!-- Tooltip dependencies -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
-        <!-- Optional theme -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
-
-        <link rel="stylesheet" type="text/css" media="all" href="css/annotools.css" />
-        <!-- <link rel="stylesheet" type="text/css" media="all" href="css/jquery-ui.min.css" /> -->
-        <link rel="stylesheet" type="text/css" media="all" href="css/simplemodal.css" />
-        <link rel="stylesheet" type="text/css" media="all" href="css/ui.fancytree.min.css" />
-
-        <!-- <script src="js/dependencies/jquery.js"></script> -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-    <!--JSON Form dependencies-->
-    <script type="application/javascript" src="js/dependencies/underscore.js"></script>
-    <script>
-        console.log("underscore:");
-        console.log(_);
-    </script>
-        
-        <script type="text/javascript" src="js/dependencies/jsonform.js"></script>
-        <script type="text/javascript" src="js/dependencies/jsv.js"></script>
-        <!--End JSON Form dependencies -->
-        <!--<script src="/featurescapeapps/js/findapi_config.js" type="text/javascript"></script>-->
-        <script src="/js/config.js"></script>
-
-        <script src="js/openseadragon/openseadragon-bin-1.0.0/openseadragon.js"></script>
-        <script src="js/openseadragon/openseadragon-imaginghelper.min.js"></script>
-        <script src="js/openseadragon/openseadragon-scalebar.js"></script>
-        <script src="js/openseadragon/openseadragonzoomlevels.js"></script>
-        <script type="text/javascript" src="js/mootools/mootools-core-1.4.5-full-nocompat-yc.js"></script>
-        <script type="text/javascript" src="js/mootools/mootools-more-1.4.0.1-compressed.js"></script>
-        <script src="js/annotationtools/annotools-openseajax-handler.js"></script>
-        <script src="js/imagemetadatatools/osdImageMetadata.js"></script>
-        <script src="js/annotationtools/ToolBar.js"></script>
-        <script src="js/annotationtools/AnnotationStore.js"></script>
-        <script src="js/annotationtools/osdAnnotationTools.js"></script>
-        <script src="js/annotationtools/geoJSONHandler.js"></script>
-        <script src="js/dependencies/MD5.js"></script>
-        <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script> 
-    
-
-        <!--Filtering Tools-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.js"></script>
-        <script src="js/filteringtools/openseadragon-filtering.js"></script>
-        <script src="js/filteringtools/spinner-slider.js"></script>
-        <script src="js/filteringtools/spinner.js"></script>
-        <script src="js/filteringtools/FilterTools.js"></script>
-        <!--End Filtering Tools-->    
-        <!--<script src="js/dependencies/jquery-ui.min.js"></script>-->
-
-        <script src="js/dependencies/jquery.fancytree-all.min.js"></script>
-        <script src="js/dependencies/simplemodal.js"></script>
-        <style type="text/css">
-            .openseadragon
-            {
-                height: 100%;
-                min-height: 100%;
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                margin: 0;
-                padding: 0;
-                background-color: #E8E8E8;
-                border: 1px solid black;
-                color: white;
-            }
-
-        .navWindow
-
-        {
-            position: absolute;
-                z-index: 10001;
-                right: 0;
-                bottom: 0;
-                border: 1px solid yellow;
-        }
-        </style>
-    </head>
-
-    <body>
+<!-- ANNOTATION -->
+    <script src="js/annotationtools/annotools-openseajax-handler.js"></script>
+    <script src="js/annotationtools/ToolBar.js"></script>
+    <script src="js/annotationtools/AnnotationStore.js"></script>
+    <script src="js/annotationtools/osdAnnotationTools.js"></script>
+    <script src="js/annotationtools/geoJSONHandler.js"></script>
+<!-- /ANNOTATION -->
 
         <div id="container">
                     
@@ -150,8 +63,10 @@
             viewer.addHandler("open", addOverlays);
             viewer.clearControls();
             viewer.open("<?php print_r($config['fastcgi_server']); ?>?DeepZoom=" + fileLocation);
+
             var imagingHelper = new OpenSeadragonImaging.ImagingHelper({viewer: viewer});
             imagingHelper.setMaxZoom(1);
+
             //console.log(this.MPP);
             viewer.scalebar({
               type: OpenSeadragon.ScalebarType.MAP,
@@ -165,14 +80,15 @@
               barThickness: 2
             });
 
-          /*
-          // This plugin requires OpenSeadragon 2.1+
-           viewer.setFilterOptions({
-               filters: {
-                   processors: OpenSeadragon.Filters.BRIGHTNESS(0)
-               }
-           });
-           */
+          osdVersion = OpenSeadragon.version;
+          if ((osdVersion.major === 2 && osdVersion.minor >= 1) || osdVersion.major > 2) {
+              // This plugin requires OpenSeadragon 2.1+
+              viewer.setFilterOptions({
+                  filters: {
+                      processors: OpenSeadragon.Filters.BRIGHTNESS(0)
+                  }
+              });
+          }
 
     //console.log(viewer);
 
@@ -335,18 +251,4 @@
     */
 
           </script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-46271588-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-</body>
-</html>
-
+<?php include 'osdFooter.php'; ?>

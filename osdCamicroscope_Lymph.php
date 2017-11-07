@@ -1,107 +1,19 @@
-    <?php 
-	session_start();
-	require '../authenticate.php';
+<?php
+/**
+ * Lymphocyte App
+ */
+include 'osdHeader.php';
+?>
 
-    $config = require 'api/Configuration/config.php';
-    //Set cancer type
-      if(isset($_GET["cancerType"])){
-          $cancerType = $_GET["cancerType"];
-          $_SESSION["cancerType"] = "u24_" . $cancerType;
-      }
-    ?>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset='utf-8'>
+<!-- ANNOTATION -->
+    <script src="js/annotationtoolslymph/annotools-openseajax-handler-lymph.js"></script>
+    <script src="js/annotationtoolslymph/ToolBar_Lymph.js"></script>
+    <script src="js/annotationtoolslymph/AnnotationStore_Lymph.js"></script>
+    <script src="js/annotationtoolslymph/osdAnnotationTools_Lymph.js"></script>
+    <script src="js/annotationtoolslymph/osdAnnotationTools_Marking.js"></script>
+    <script src="js/annotationtoolslymph/geoJSONHandler_Lymph.js"></script>
+<!-- /ANNOTATION -->
 
-        <title>[caMicroscope OSD][Subject: <?php echo json_encode($_GET['tissueId']); ?>][User: <?php echo $_SESSION["name"]; ?>]</title>
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-        <!--<link rel="stylesheet" type="text/css" media="all" href="css/jquery-ui.min.css" />-->
-        <link rel="stylesheet" type="text/css" media="all" href="css/simplemodal.css" />
-        <link rel="stylesheet" type="text/css" media="all" href="css/ui.fancytree.min.css" />
-        <link rel="stylesheet" type="text/css" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.7.0/jquery.modal.css" />
-        <script src="js/dependencies/jquery.js"></script>
-  
-        <!--JSON Form dependencies-->
-        <script src="js/dependencies/underscore.js"></script>
-        <script>
-            console.log("underscore.js: _");
-        </script>
-        <script type="text/javascript" src="js/dependencies/jsonform.js"></script>
-        <script type="text/javascript" src="js/dependencies/jsv.js"></script>
-        <!--End JSON Form dependencies -->
-        
-        <script src="/js/config.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
-        <script src="js/openseadragon/openseadragon-bin-1.0.0/openseadragon.js"></script>
-        <script src="js/openseadragon/openseadragon-imaginghelper.min.js"></script>
-        <script src="js/openseadragon/openseadragon-scalebar.js"></script>
-
-        <script type="text/javascript" src="js/mootools/mootools-core-1.4.5-full-nocompat-yc.js"></script>
-        <script type="text/javascript" src="js/mootools/mootools-more-1.4.0.1-compressed.js"></script>
-        <!--<script src="js/annotationtools/annotools-openseajax-handler.js"></script>-->
-        <script src="js/annotationtoolslymph/annotools-openseajax-handler-lymph.js"></script>
-        <script src="js/imagemetadatatools/osdImageMetadata.js"></script>
-        <!--<script src="js/annotationtools/ToolBar.js"></script>-->
-        <!--<script src="js/annotationtools/AnnotationStore.js"></script>-->
-        <!--<script src="js/annotationtools/osdAnnotationTools.js"></script>-->
-		<!--<script src="js/annotationtools/osdAnnotationDotTools.js"></script>-->
-		<!--<script src="js/annotationtools/osdAnnotationTools_Marking.js"></script>-->
-        <!--<script src="js/annotationtools/geoJSONHandler.js"></script>-->
-        
-        <script src="js/annotationtoolslymph/ToolBar_Lymph.js"></script>
-        <script src="js/annotationtoolslymph/AnnotationStore_Lymph.js"></script>
-        <script src="js/annotationtoolslymph/osdAnnotationTools_Lymph.js"></script>
-		<script src="js/annotationtoolslymph/osdAnnotationTools_Marking.js"></script>
-        <script src="js/annotationtoolslymph/geoJSONHandler_Lymph.js"></script>
-        
-        <script src="js/dependencies/MD5.js"></script>
-        <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script> 
-        
-        <!--<script src="js/dependencies/jquery-ui.min.js"></script>-->
-
-        <script src="js/dependencies/jquery.fancytree-all.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.7.0/jquery.modal.js"> </script>
-        <script src="js/dependencies/simplemodal.js"></script>
-        <script src="js/dependencies/d3.js"></script>
-        <style type="text/css">
-            .openseadragon
-            {
-                height: 100%;
-                min-height: 100%;
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                margin: 0;
-                padding: 0;
-                background-color: #E8E8E8;
-                border: 1px solid black;
-                color: white;
-            }
-            .controls textarea{
-              height: 50px;
-            }
-            .navWindow
-            {
-                position: absolute;
-                z-index: 10001;
-                right: 0;
-                bottom: 0;
-                border: 1px solid yellow;
-            }
-            .modal a.close-modal{
-              top: 0;
-              right: 0;
-            }
-        </style>
-        <link rel="stylesheet" type="text/css" media="all" href="css/annotools.css" /> 
-	    <link rel="stylesheet" type="text/css" media="all" href="css/multiheattools.css" />
-    </head>
-
-    <body>
         <div id="tool"></div>
         <div id="panel"></div>
 
@@ -319,17 +231,4 @@
     */
 
 </script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-46271588-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-</body>
-</html>
-
+<?php include 'osdFooter.php'; ?>
