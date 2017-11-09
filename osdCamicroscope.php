@@ -14,7 +14,7 @@ include 'osdHeader.php';
 <!-- /ANNOTATION -->
 
         <div id="container">
-                    
+
             <div id="tool"></div>
             <div id="panel"></div>
             <div id="bookmarkURLDiv"></div>
@@ -35,15 +35,15 @@ include 'osdHeader.php';
 
 
           var imagedata = new OSDImageMetaData({imageId:tissueId});
-         
+
           var MPP = imagedata.metaData[0];
 
 
           var fileLocation = imagedata.metaData[1];
          jQuery("#bookmarkURLDiv").hide();
-         
-          var viewer = new OpenSeadragon.Viewer({ 
-                id: "viewer", 
+
+          var viewer = new OpenSeadragon.Viewer({
+                id: "viewer",
                 prefixUrl: "images/",
                 showNavigator:  true,
                 navigatorPosition:   "BOTTOM_RIGHT",
@@ -59,7 +59,7 @@ include 'osdHeader.php';
     //      var zoomLevels = viewer.zoomLevels({
     //        levels:[0.001, 0.01, 0.2, 0.1,  1]
     //      });
-            
+
             viewer.addHandler("open", addOverlays);
             viewer.clearControls();
             viewer.open("<?php print_r($config['fastcgi_server']); ?>?DeepZoom=" + fileLocation);
@@ -80,6 +80,8 @@ include 'osdHeader.php';
               barThickness: 2
             });
 
+          /*
+          // No longer using Filters/BRIGHTNESS
           osdVersion = OpenSeadragon.version;
           if ((osdVersion.major === 2 && osdVersion.minor >= 1) || osdVersion.major > 2) {
               // This plugin requires OpenSeadragon 2.1+
@@ -89,6 +91,7 @@ include 'osdHeader.php';
                   }
               });
           }
+          */
 
     //console.log(viewer);
 
@@ -110,10 +113,10 @@ include 'osdHeader.php';
 
     function addOverlays() {
         var annotationHandler = new AnnotoolsOpenSeadragonHandler(viewer, {});
-        
+
         annotool= new annotools({
                 canvas:'openseadragon-canvas',
-                iid: tissueId, 
+                iid: tissueId,
                 viewer: viewer,
                 annotationHandler: annotationHandler,
                 mpp:MPP
@@ -135,7 +138,7 @@ include 'osdHeader.php';
         // For the bootstrap tooltip
         // jQuery('[data-toggle="tooltip"]').tooltip();
         // commented out, working on style
-        
+
         //var panel = new panel();
         jQuery("#panel").hide();
         /*Pan and zoom to point*/
@@ -143,7 +146,7 @@ include 'osdHeader.php';
         var bound_y = <?php echo json_encode($_GET['y']); ?>;
         var zoom = <?php echo json_encode($_GET['zoom']); ?> || viewer.viewport.getMaxZoom();
         zoom=Number(zoom); // convert string to number if zoom is string
-        
+
         /*
         var savedFilters = [
           {'name': 'Brightness', 'value': 100},
@@ -156,7 +159,7 @@ include 'osdHeader.php';
           console.log(filteringtools)
           filteringtools.showFilterControls();
           for(var i=0; i<savedFilters.length; i++){
-                
+
                 console.log(i);
                 var f = savedFilters[i];
                 var filterName = f.name;
@@ -185,7 +188,7 @@ include 'osdHeader.php';
 
                 viewer.viewport.panTo(pan);
                 viewer.viewport.zoomTo(zoom);
-            
+
             } else {
                 if(viewport) {
                     console.log("here");
@@ -198,7 +201,7 @@ include 'osdHeader.php';
               filteringtools.showFilterControls();
 
               for(var i=0; i<savedFilters.length; i++){
-                    
+
 
                     var f = savedFilters[i];
                     var filterName = f.name;
@@ -209,12 +212,12 @@ include 'osdHeader.php';
                     }else {
                         jQuery("#control"+filterName).val(1*f.value);
                         jQuery("#control"+filterName+"Num").val(1*f.value);
-                
+
                     }
                 }
             }
             filteringtools.updateFilters();
-        
+
         });
         }
 
@@ -231,7 +234,7 @@ include 'osdHeader.php';
       if (!String.prototype.format) {
         String.prototype.format = function() {
             var args = arguments;
-            return this.replace(/{(\d+)}/g, function(match, number) { 
+            return this.replace(/{(\d+)}/g, function(match, number) {
             return typeof args[number] != 'undefined'
                 ? args[number]
                 : match
