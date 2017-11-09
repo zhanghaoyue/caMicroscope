@@ -51,9 +51,10 @@ if (isset($_GET["cancerType"])) {
     <script src="js/openseadragon/openseadragon-bin-2.3.1/openseadragon.js"></script>
     <script src="js/openseadragon/openseadragon-imaginghelper.min.js"></script>
     <script src="js/openseadragon/openseadragon-scalebar.js"></script>
-
+    <script src="js/openseadragon/openseadragonzoomlevels.js"></script>
+    <!--
     <script>
-        // OpenSeadragonZoomLevels requires OpenSeadragon version 2.0.0+ -->
+        // OpenSeadragonZoomLevels requires OpenSeadragon version 2.0.0+
         osdVersion = OpenSeadragon.version;
         if (osdVersion.major >= 2) {
             var head = document.getElementsByTagName('head')[0];
@@ -62,6 +63,7 @@ if (isset($_GET["cancerType"])) {
             head.appendChild(script);
         }
     </script>
+    -->
 
     <script src="js/mootools/mootools-core-1.4.5-full-nocompat-yc.js"></script>
     <script src="js/mootools/mootools-more-1.4.0.1-compressed.js"></script>
@@ -81,6 +83,8 @@ if (isset($_GET["cancerType"])) {
 
     <!--Filtering Tools-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.js"></script>
+    <script src="js/filteringtools/openseadragon-filtering.js"></script>
+    <!--
     <script>
         // Filtering plugin requires OpenSeadragon version >= 2.1
         if ((osdVersion.major === 2 && osdVersion.minor >= 1) || osdVersion.major > 2) {
@@ -89,6 +93,7 @@ if (isset($_GET["cancerType"])) {
             head.appendChild(script);
         }
     </script>
+    -->
     <script src="js/filteringtools/spinner-slider.js"></script>
     <script src="js/filteringtools/spinner.js"></script>
     <script src="js/filteringtools/FilterTools.js"></script>
