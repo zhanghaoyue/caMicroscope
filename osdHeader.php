@@ -49,8 +49,7 @@ if (isset($_GET["cancerType"])) {
 
     <!--script src="js/openseadragon/openseadragon-bin-1.0.0/openseadragon.js"></script-->
     <script src="js/openseadragon/openseadragon-bin-2.3.1/openseadragon.js"></script>
-    <!--script src="js/openseadragon/openseadragon-imaginghelper.min.js"></script-->
-    <script src="js/openseadragon/imaginghelper.js"></script>
+    <script src="js/openseadragon/openseadragon-imaginghelper.min.js"></script>
     <script src="js/openseadragon/openseadragon-scalebar.js"></script>
 
     <script>
