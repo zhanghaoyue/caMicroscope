@@ -30,16 +30,17 @@ include 'shared/osdHeader.php';
         <script type="text/javascript">
           $.noConflict();
 
-          var annotool = null;
-          var tissueId = <?php echo json_encode($_GET['tissueId']); ?>;
-
-
+          var annotool, tissueId = null;
+          tissueId = <?php echo json_encode($_GET['tissueId']); ?>;
           var imagedata = new OSDImageMetaData({imageId:tissueId});
-
           var MPP = imagedata.metaData[0];
-
-
           var fileLocation = imagedata.metaData[1];
+          console.log("imagedata: ", imagedata);
+
+          if (typeof tissueId === 'undefined' || tissueId === null || tissueId === '') {
+              alert("tissueId is undefined. Exiting.");
+          }
+          
          jQuery("#bookmarkURLDiv").hide();
 
           var viewer = new OpenSeadragon.Viewer({
