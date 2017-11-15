@@ -2,7 +2,7 @@
  * TOOLBAR
  * LYMPHOCYTE APP
  */
-$.getScript('js/shared/ToolBar.js', function () {
+$.getScript('shared/ToolBar.js', function () {
 
     /**
      * Create Buttons

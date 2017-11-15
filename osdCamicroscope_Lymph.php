@@ -2,7 +2,7 @@
 /**
  * Lymphocyte App
  */
-include 'osdHeader.php';
+include 'shared/osdHeader.php';
 ?>
 
 <!-- ANNOTATION -->
@@ -81,15 +81,15 @@ include 'osdHeader.php';
           //console.log(tissueId);
           //console.log(imagedata);
           //console.log(tissueId);
-          
+
           var MPP = imagedata.metaData[0];
           console.log(MPP);
             //console.log(imagedata);
           var fileLocation = imagedata.metaData[1];//.replace("tcga_data","tcga_images");
           //console.log(fileLocation);
-         
-          var viewer = new OpenSeadragon.Viewer({ 
-                id: "viewer", 
+
+          var viewer = new OpenSeadragon.Viewer({
+                id: "viewer",
                 prefixUrl: "images/",
                 showNavigator:  true,
                 navigatorPosition:   "BOTTOM_RIGHT",
@@ -105,7 +105,7 @@ include 'osdHeader.php';
             //var zoomLevels = viewer.zoomLevels({
             //  levels:[0.001, 0.01, 0.2, 0.1,  1]
             //});
-            
+
             viewer.addHandler("open", addOverlays);
             viewer.clearControls();
             viewer.open("<?php print_r($config['fastcgi_server']); ?>?DeepZoom=" + fileLocation);
@@ -148,7 +148,7 @@ include 'osdHeader.php';
         //var sessionUsername = 'test@gmail.com';
         annotool= new annotools({
                 canvas:'openseadragon-canvas',
-                iid: tissueId, 
+                iid: tissueId,
                 viewer: viewer,
                 annotationHandler: annotationHandler,
                 mpp:MPP,
@@ -162,9 +162,9 @@ include 'osdHeader.php';
                 width: '100%',
                 iid: tissueId,
                 annotool: annotool
-           
+
         });
-        
+
         annotool.toolBar = toolBar;
         annotationHandler.annotool = annotool;
         annotationHandler.toolbar = toolBar;
@@ -180,13 +180,13 @@ include 'osdHeader.php';
         jQuery("#weightpanel").hide();
         jQuery("#markuppanel").hide();
         jQuery("#switchuserpanel").hide();
-        
+
         /* Close weight panel */
         jQuery('#closeWeightPanel').click(function (e) {
 	        e.preventDefault();
             jQuery("#weightpanel").hide('slide');
         });
-        
+
         /* Close markup panel */
         jQuery('#closeMarkupPanel').click(function (e) {
 	        e.preventDefault();
@@ -197,7 +197,7 @@ include 'osdHeader.php';
             annotool.drawLayer.hide();
             annotool.addMouseEvents();
         });
-        
+
         if(bound_x && bound_y){
             var ipt = new OpenSeadragon.Point(+bound_x, +bound_y);
             var vpt = viewer.viewport.imageToViewportCoordinates(ipt);
@@ -211,7 +211,7 @@ include 'osdHeader.php';
     if (!String.prototype.format) {
         String.prototype.format = function() {
             var args = arguments;
-            return this.replace(/{(\d+)}/g, function(match, number) { 
+            return this.replace(/{(\d+)}/g, function(match, number) {
             return typeof args[number] != 'undefined'
                 ? args[number]
                 : match
@@ -231,4 +231,4 @@ include 'osdHeader.php';
     */
 
 </script>
-<?php include 'osdFooter.php'; ?>
+<?php include 'shared/osdFooter.php'; ?>

@@ -2,7 +2,7 @@
 /**
  * caMicroscope
  */
-include 'osdHeader.php';
+include 'shared/osdHeader.php';
 ?>
 
 <!-- ANNOTATION -->
@@ -254,4 +254,4 @@ include 'osdHeader.php';
     */
 
           </script>
-<?php include 'osdFooter.php'; ?>
+<?php include 'shared/osdFooter.php'; ?>

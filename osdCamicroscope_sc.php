@@ -2,7 +2,7 @@
 /**
  * Segment Curation App
  */
-include 'osdHeader.php';
+include 'shared/osdHeader.php';
 ?>
 
 <!-- ANNOTATION -->
@@ -32,24 +32,24 @@ include 'osdHeader.php';
         <script type="text/javascript">
           $.noConflict();
           var annotool = null;
-          var tissueId = <?php echo json_encode($_GET['tissueId']); ?>;	
-          	
-	  var cancerType = "<?php echo $_SESSION["cancerType"] ?>";		    
-		           
+          var tissueId = <?php echo json_encode($_GET['tissueId']); ?>;
+
+	  var cancerType = "<?php echo $_SESSION["cancerType"] ?>";
+
 	  console.log("cancerType is: "+cancerType);
 	  console.log("tissueId is: "+tissueId);
-		  
-          var imagedata = new OSDImageMetaData({imageId:tissueId});          
-          //console.log(imagedata);         
-          
+
+          var imagedata = new OSDImageMetaData({imageId:tissueId});
+          //console.log(imagedata);
+
           var MPP = imagedata.metaData[0];
 	  console.log(MPP);
           //console.log(imagedata);
           var fileLocation = imagedata.metaData[1];//.replace("tcga_data","tcga_images");
           //console.log(fileLocation);
-         
-          var viewer = new OpenSeadragon.Viewer({ 
-                id: "viewer", 
+
+          var viewer = new OpenSeadragon.Viewer({
+                id: "viewer",
                 prefixUrl: "images/",
                 showNavigator:  true,
                 //navigatorPosition:   "BOTTOM_LEFT",
@@ -66,7 +66,7 @@ include 'osdHeader.php';
            // var zoomLevels = viewer.zoomLevels({
            //levels:[0.001, 0.01, 0.2, 0.1,  1]
            // });
-            
+
             viewer.addHandler("open", addOverlays);
             viewer.clearControls();
             viewer.open("<?php print_r($config['fastcgi_server']); ?>?DeepZoom=" + fileLocation);
@@ -107,13 +107,13 @@ include 'osdHeader.php';
             var annotationHandler = new AnnotoolsOpenSeadragonHandler(viewer, {});
              annotool= new annotools({
                     canvas:'openseadragon-canvas',
-                    iid: tissueId, 
+                    iid: tissueId,
 				            cancerType: cancerType,
                     viewer: viewer,
                     annotationHandler: annotationHandler,
                     mpp:MPP
                });
-			   
+
             //console.log(tissueId);
             var toolBar = new ToolBar('tool', {
                 left:'0px',
@@ -123,24 +123,24 @@ include 'osdHeader.php';
                 iid: tissueId,
 				        cancerType: cancerType,
                 annotool: annotool
-           
+
              });
-			 
+
            annotool.toolBar = toolBar;
-		   
+
            toolBar.createButtons();
-		
-	 var user_email = "<?php echo $_SESSION["email"]; ?>";  
-         console.log("user_email :" + user_email);  
-      
+
+	 var user_email = "<?php echo $_SESSION["email"]; ?>";
+         console.log("user_email :" + user_email);
+
         var index = user_email.indexOf("@");
-        var user= user_email.substring(0,index);		
+        var user= user_email.substring(0,index);
         var execution_id =user+"_composite_input" ;
-		
+
    	annotool.execution_id = execution_id;
 	annotool.user = user;
 	console.log("execution_id :" + annotool.execution_id);
-		
+
         /*Pan and zoom to point*/
         var bound_x = <?php echo json_encode($_GET['x']); ?>;
         var bound_y = <?php echo json_encode($_GET['y']); ?>;
@@ -160,14 +160,14 @@ include 'osdHeader.php';
       if (!String.prototype.format) {
         String.prototype.format = function() {
             var args = arguments;
-            return this.replace(/{(\d+)}/g, function(match, number) { 
+            return this.replace(/{(\d+)}/g, function(match, number) {
             return typeof args[number] != 'undefined'
                 ? args[number]
                 : match
             ;
             });
         };
-      }   
+      }
 
  </script>
-<?php include 'osdFooter.php'; ?>
+<?php include 'shared/osdFooter.php'; ?>
