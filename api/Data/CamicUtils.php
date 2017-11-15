@@ -66,7 +66,7 @@ class CamicUtils
 
             $file = strrchr($value, '/');
             $fileNameWithoutExtension = substr($file, 0, -5);
-            
+
             if (is_dir($path . $fileNameWithoutExtension)) {
                 $link = $path . $fileNameWithoutExtension . $file . ".dzi";
             } else {
