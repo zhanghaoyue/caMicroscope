@@ -2604,6 +2604,8 @@ annotools.prototype.generateCompositeDataset = function() {
 
 
 function pollOrder(id, cb){
+    console.log("pollOrder_sc");
+
   jQuery.get("api/Data/compositeOrder.php?id="+id, function(data){
     //console.log(data.state);
     if(data.state.contains("fail")){
