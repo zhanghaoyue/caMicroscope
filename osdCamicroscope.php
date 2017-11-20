@@ -73,19 +73,24 @@ include 'shared/osdHeader.php';
     overlayRoutine(tissueId, viewer);
 
     //console.log(this.MPP);
-    /*
-    viewer.scalebar({
-        type: OpenSeadragon.ScalebarType.MAP,
-        pixelsPerMeter: (1 / (parseFloat(this.MPP["mpp-x"]) * 0.000001)),
-        xOffset: 5,
-        yOffset: 10,
-        stayInsideImage: true,
-        color: "rgb(150,150,150)",
-        fontColor: "rgb(100,100,100)",
-        backgroundColor: "rgba(255,255,255,0.5)",
-        barThickness: 2
-    });
-    */
+
+    try {
+        viewer.scalebar({
+            type: OpenSeadragon.ScalebarType.MAP,
+            pixelsPerMeter: (1 / (parseFloat(this.MPP["mpp-x"]) * 0.000001)),
+            xOffset: 5,
+            yOffset: 10,
+            stayInsideImage: true,
+            color: "rgb(150,150,150)",
+            fontColor: "rgb(100,100,100)",
+            backgroundColor: "rgba(255,255,255,0.5)",
+            barThickness: 2
+        });
+    }
+    catch (ex) {
+        console.log("scalebar err: ", ex.message);
+    }
+    
 
     /*
     // No longer using Filters/BRIGHTNESS
